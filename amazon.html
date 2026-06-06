@@ -86,7 +86,7 @@
 
 
         <div class="right" style="flex: 1; text-align: center; padding-top: 70;">
-            <p id="added-item">Added Item:2</p>
+            <p id="added-item">Added Item:0</p>
             <p>Item List</p>
             <div id="item-list" style="justify-content: center;">
                 
@@ -96,10 +96,11 @@
     </span>
     <script>
         let totalCount=5
-        let cartCount=2
+        let cartCount=0
         let cartItem=[]
         let totalAmount=0
         let flag=0
+        
         function deleteItem(id,name,price)
         {
             for(i=0;i<cartItem.length;i++)
@@ -111,16 +112,16 @@
                             cartItem = cartItem.filter(item => item.id !== id);                            
                         else
                             cartItem[i].qty=cartItem[i].qty-1
+                       
+                        totalCount=totalCount+1
+                        cartCount=cartCount-1
+                        
                         render()
                         break
                     }  
             }
-             totalCount=totalCount+1
-            cartCount=cartCount-1
-            const newLeft=document.getElementById('left')
-            const newAdded=document.getElementById('added-item')
-            newLeft.innerHTML='Total Item:'+totalCount
-            newAdded.innerHTML='Added Item:'+cartCount
+
+           
         }
         function addItem(id,name,price)
         {
@@ -153,10 +154,7 @@
            
             render()
             }
-            const newLeft=document.getElementById('left')
-            const newAdded=document.getElementById('added-item')
-            newLeft.innerHTML='Total Item:'+totalCount
-            newAdded.innerHTML='Added Item:'+cartCount
+            
             
         }
         function render()
@@ -171,6 +169,10 @@
                 totalAmount=totalAmount+cartItem[i].price*cartItem[i].qty
                 document.getElementById('total').innerHTML='Total='+totalAmount
             }
+            const newLeft=document.getElementById('left')
+            const newAdded=document.getElementById('added-item')
+            newLeft.innerHTML='Total Item:'+totalCount
+            newAdded.innerHTML='Added Item:'+cartCount
         }
     </script>
 </body>
