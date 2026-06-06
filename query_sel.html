@@ -1,0 +1,45 @@
+<html>
+
+<body>
+    <div id="master">
+        <div id='head' style="display:inline;">
+            <input type="text" id="'todo">
+            <button onclick="addTodo()">Add</button>
+        </div>
+        <div id="todoList">
+
+        </div>
+    </div>
+    <script>
+        let counter = 0
+        let editId = 0
+        let editMode = 0
+        function addTodo() {
+            if (editMode === 0) {
+                counter = counter + 1
+                let newDiv = document.createElement('div')
+                newDiv.setAttribute('id', counter)
+                let todoText = document.querySelector('input').value
+                newDiv.innerHTML = '<span><p id=p' + counter + '>' + todoText + '</p><button onclick=deleteTodo(' + counter + ')>Delete</button><button onclick=updateTodo(' + counter + ')>Edit</button></span>'
+                document.getElementById('todoList').appendChild(newDiv)
+                document.querySelector('input').value = ''
+            }
+            else {
+                 let todoText = document.querySelector('input').value
+                document.getElementById('p'+editId).innerHTML=todoText
+            }
+        }
+        function deleteTodo(id) {
+            const deleteElement = document.getElementById(id)
+            deleteElement.parentNode.removeChild(deleteElement)
+        }
+        function updateTodo(id) {
+            const data = document.getElementById('p' + id).innerHTML
+            document.querySelector('input').value = data
+            editId = id
+            editMode = 1
+        }
+    </script>
+</body>
+
+</html>
