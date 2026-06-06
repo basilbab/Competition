@@ -107,11 +107,20 @@
                   if(cartItem[i].id===id)
                     {
                         flag=1
-                        cartItem[i].qty=cartItem[i].qty-1
+                        if(cartItem[i].qty===1)
+                            cartItem = cartItem.filter(item => item.id !== id);                            
+                        else
+                            cartItem[i].qty=cartItem[i].qty-1
                         render()
                         break
                     }  
             }
+             totalCount=totalCount+1
+            cartCount=cartCount-1
+            const newLeft=document.getElementById('left')
+            const newAdded=document.getElementById('added-item')
+            newLeft.innerHTML='Total Item:'+totalCount
+            newAdded.innerHTML='Added Item:'+cartCount
         }
         function addItem(id,name,price)
         {
@@ -140,13 +149,14 @@
             cartItem.push(newItem)
             totalCount=totalCount-1
             cartCount=cartCount+1
+            
+           
+            render()
+            }
             const newLeft=document.getElementById('left')
             const newAdded=document.getElementById('added-item')
             newLeft.innerHTML='Total Item:'+totalCount
             newAdded.innerHTML='Added Item:'+cartCount
-           
-            render()
-            }
             
         }
         function render()
